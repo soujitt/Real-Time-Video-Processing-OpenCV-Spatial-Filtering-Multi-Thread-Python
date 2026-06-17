@@ -1,4 +1,4 @@
-# Real-Time Video Processing Framework using OpenCV
+# Design and Implementation of a Real-Time Video Processing Framework Using OpenCV-Based Spatial Filtering and Multi-Thread Python Architecture
 
 A multi-threaded real-time video processing framework developed in Python using OpenCV for 720p live video enhancement and analysis. The framework provides interactive image enhancement, edge detection, performance monitoring, and side-by-side visualization without requiring dedicated hardware acceleration.
 
