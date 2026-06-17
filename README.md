@@ -1,162 +1,480 @@
-# Design and Implementation of a Real-Time Video Processing Framework Using OpenCV-Based Spatial Filtering and Multi-Thread Python Architecture
+# Real-Time Video Processing Framework using OpenCV-Based Spatial Filtering and Multi-Thread Python Architecture
 
-A multi-threaded real-time video processing framework developed in Python using OpenCV for 720p live video enhancement and analysis. The framework provides interactive image enhancement, edge detection, performance monitoring, and side-by-side visualization without requiring dedicated hardware acceleration.
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green)
+![NumPy](https://img.shields.io/badge/NumPy-Scientific_Computing-orange)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## Features
+## Overview
 
-- Real-time 720p video processing
-- Brightness and contrast adjustment
-- Grayscale conversion
-- Sharpening filter
-- Box blur filter
-- Gaussian blur filter
-- Emboss filter
-- Negative transformation
-- Morphological dilation
-- Sobel edge detection
-- Canny edge detection
-- Side-by-side display of original and processed frames
-- Frame capture functionality
-- Real-time FPS monitoring
-- Multi-threaded architecture for improved responsiveness
-- Modular design for future FPGA acceleration
+This repository presents a **multi-threaded real-time video processing framework** developed using **Python and OpenCV** for interactive image enhancement and feature extraction. The framework processes 720p live video streams and provides multiple filtering and edge detection operations with real-time parameter control and performance monitoring.
 
-## System Architecture
+The system combines image enhancement, frame capture, FPS monitoring, and side-by-side visualization within a single modular software architecture. Independent threads are used for video processing and performance evaluation to achieve responsive and low-latency operation.
 
+The framework serves as a software prototype and can be extended to FPGA or hardware-software co-design platforms in future implementations.
 
+---
+
+# Features
+
+### Image Enhancement
+
+* Brightness control
+* Contrast control
+* Grayscale conversion
+* Negative image transformation
+* Sharpening filter
+* Box blur
+* Gaussian blur
+* Emboss filter
+* Filter2D + Morphological Dilation
+
+### Feature Extraction
+
+* Sobel edge detection
+* Canny edge detection
+
+### User Interface
+
+* Interactive GUI
+* Real-time mode selection
+* Side-by-side display
+* Frame capture
+* Runtime parameter adjustment
+
+### Performance Analysis
+
+* FPS monitoring
+* Speedup estimation
+* PSNR computation
+* MSE calculation
+* SNR measurement
+* SSIM evaluation
+* Edge Preservation Index (EPI)
+* Edge density analysis
+
+---
+
+# Applications
+
+* Intelligent surveillance
+* Computer vision systems
+* Robotics
+* Industrial inspection
+* Image enhancement
+* Smart cameras
+* Edge computing
+* Machine vision
+* FPGA hardware acceleration research
+
+---
+
+# System Architecture
+
+```
 Camera Input
       │
       ▼
-Frame Acquisition (OpenCV)
+Frame Acquisition Module
+(OpenCV Video Capture)
       │
       ▼
-Pre-processing
-(Brightness, Contrast, Grayscale)
+Pre-processing Module
+├── Brightness Adjustment
+├── Contrast Adjustment
+└── Grayscale Conversion
       │
       ▼
-Image Enhancement
- ├── Sharpen
- ├── Box Blur
- ├── Gaussian Blur
- ├── Emboss
- ├── Negative
- ├── Dilation
- ├── Sobel Edge Detection
- └── Canny Edge Detection
+Image Enhancement Module
+├── Sharpen
+├── Box Blur
+├── Gaussian Blur
+├── Emboss
+├── Negative Transformation
+├── Filter2D + Dilation
+├── Sobel Edge Detection
+└── Canny Edge Detection
       │
       ▼
-Visualization
+Visualization Module
 (Side-by-Side Display)
       │
       ├── Frame Capture
       └── FPS Monitoring Thread
+      │
+      ▼
+Processed Output
+```
 
+---
 
-## Technologies Used
+# Technologies Used
 
-- Python 3.x
-- OpenCV
-- NumPy
-- Tkinter
-- Multi-threading
+| Component            | Technology      |
+| -------------------- | --------------- |
+| Language             | Python          |
+| Image Processing     | OpenCV          |
+| Numerical Operations | NumPy           |
+| GUI                  | Tkinter         |
+| Parallelism          | Multi-threading |
+| Video Source         | Webcam          |
+| Resolution           | 1280×720        |
 
-## Installation
+---
 
-Clone the repository:
+# Installation
+
+Clone the repository
 
 ```bash
 git clone https://github.com/username/repository-name.git
 cd repository-name
 ```
 
-Install dependencies:
+Install dependencies
 
 ```bash
 pip install opencv-python numpy pillow
 ```
 
-## Usage
-
-Run the application:
+Run
 
 ```bash
 python main.py
 ```
 
-The GUI allows users to:
+---
 
-- Select different processing modes
-- Adjust brightness and contrast
-- Enable grayscale conversion
-- Capture processed frames
-- Monitor FPS in real time
-- Compare original and processed outputs
+# Processing Modes
 
-## Performance
+## Sharpen Filter
 
-| Processing Mode | FPS | Speedup |
-|----------------|-----|----------|
-| Sharpen | ~17 FPS | 1.57× |
-| Sobel Edge Detection | ~18.98 FPS | 1.40× |
-| Canny Edge Detection | ~20.95 FPS | 1.81× |
+Kernel:
 
-### Image Quality Metrics
-
-- PSNR: 30.22 dB
-- SSIM: 0.898
-- SNR: 26.20 dB
-
-## Applications
-
-- Intelligent surveillance
-- Computer vision systems
-- Robotics and autonomous navigation
-- Industrial inspection
-- Edge AI devices
-- Machine vision
-- Image enhancement and analysis
-- Academic research
-
-## Future Work
-
-- FPGA hardware acceleration
-- PYNQ-Z2 implementation
-- Hardware-software co-design
-- GPU acceleration
-- Deep learning-based enhancement
-- Object detection and tracking
-- Semantic segmentation
-
-## Authors
-
-- **Soujit Chel**  
-  Department of Electronics and Telecommunication Engineering  
-  KIIT University, Bhubaneswar, India
-
-- **Jhilam Jana**  
-  Department of CSE (AI & ML)  
-  Institute of Engineering & Management, Kolkata, India
-
-- **Sayan Tripathi**  
-  Department of CSE (AI & ML)  
-  Institute of Engineering & Management, Kolkata, India
-
-## Citation
-
-If you use this work in your research, please cite:
-
-```bibtex
-@article{chel2026realtimevideo,
-  title={Design and Implementation of a Real-Time Video Processing Framework Using OpenCV-Based Spatial Filtering and Multi-Thread Python Architecture},
-  author={Chel, Soujit and Jana, Jhilam and Tripathi, Sayan},
-  year={2026}
-}
+```
+0  -1   0
+-1  5  -1
+0  -1   0
 ```
 
-## License
+Purpose:
 
-This project is released under the MIT License.
+* Enhance fine details
+* Improve edge sharpness
+
+Output:
+
+```text
+images/sharpen_output.png
+```
 
 ---
 
-**Keywords:** OpenCV, Real-Time Video Processing, Image Enhancement, Edge Detection, Multi-Threading, Computer Vision, FPS Monitoring, Python, Image Filtering, Machine Vision.
+## Box Blur
+
+Purpose:
+
+* Remove noise
+* Smooth image
+
+Output:
+
+```text
+images/box_blur_output.png
+```
+
+---
+
+## Gaussian Blur
+
+Purpose:
+
+* Preserve edges
+* Reduce Gaussian noise
+
+Output:
+
+```text
+images/gaussian_output.png
+```
+
+---
+
+## Emboss Filter
+
+Purpose:
+
+* Create 3D texture appearance
+
+Output:
+
+```text
+images/emboss_output.png
+```
+
+---
+
+## Negative Transformation
+
+Purpose:
+
+* Increase intensity contrast
+
+Output:
+
+```text
+images/negative_output.png
+```
+
+---
+
+## Filter2D + Dilation
+
+Purpose:
+
+* Improve structural continuity
+
+Output:
+
+```text
+images/dilation_output.png
+```
+
+---
+
+## Sobel Edge Detection
+
+Gradient magnitude:
+
+```
+G = √(Gx² + Gy²)
+```
+
+Purpose:
+
+* Fast gradient extraction
+
+Output:
+
+```text
+images/sobel_output.png
+```
+
+---
+
+## Canny Edge Detection
+
+Stages:
+
+1. Gaussian smoothing
+2. Gradient computation
+3. Non-maximum suppression
+4. Double thresholding
+5. Hysteresis
+
+Output:
+
+```text
+images/canny_output.png
+```
+
+---
+
+# Performance Metrics
+
+### FPS
+
+```
+FPS = Number of Frames / Elapsed Time
+```
+
+### Quality Metrics
+
+* PSNR
+* SSIM
+* SNR
+* MSE
+* EPI
+* Edge Density
+
+---
+
+# Experimental Setup
+
+| Parameter       | Value          |
+| --------------- | -------------- |
+| Language        | Python         |
+| Library         | OpenCV         |
+| Resolution      | 1280×720       |
+| Video Source    | Webcam         |
+| Processing Type | Software Only  |
+| Architecture    | Multi-threaded |
+
+---
+
+# Results
+
+## Sharpen Filter
+
+| Metric  | Value    |
+| ------- | -------- |
+| PSNR    | 30.22 dB |
+| MSE     | 61.75    |
+| SNR     | 26.20 dB |
+| SSIM    | 0.898    |
+| Speedup | 1.57×    |
+
+Image:
+
+```
+images/result_sharpen.png
+```
+
+---
+
+## Sobel Edge Detection
+
+| Metric       | Value |
+| ------------ | ----- |
+| FPS          | 18.98 |
+| Speedup      | 1.40× |
+| EPI          | 0.042 |
+| Edge Density | 0.933 |
+
+Image:
+
+```
+images/result_sobel.png
+```
+
+---
+
+## Canny Edge Detection
+
+| Metric       | Value |
+| ------------ | ----- |
+| FPS          | 20.95 |
+| Speedup      | 1.81× |
+| EPI          | 0.017 |
+| Edge Density | 0.032 |
+
+Image:
+
+```
+images/result_canny.png
+```
+
+---
+
+# Performance Comparison
+
+| Operation           | Complexity | Characteristics       |
+| ------------------- | ---------- | --------------------- |
+| Sharpen             | Moderate   | Detail enhancement    |
+| Box Blur            | Low        | Noise suppression     |
+| Gaussian Blur       | Moderate   | Smooth output         |
+| Emboss              | Moderate   | Texture enhancement   |
+| Filter2D + Dilation | Moderate   | Structural continuity |
+| Sobel               | Low        | Fast edge extraction  |
+| Canny               | High       | Accurate boundaries   |
+
+---
+
+# GUI Output
+
+The application provides:
+
+* Live video display
+* Side-by-side comparison
+* FPS display
+* Quality metrics
+* Runtime filter selection
+* Brightness and contrast sliders
+* Threshold adjustment
+* Frame capture functionality
+
+Place screenshots inside:
+
+```
+images/gui.png
+images/brightness.png
+images/negative.png
+images/filter2d_dilate.png
+images/sobel_gui.png
+images/canny_gui.png
+```
+
+---
+
+# Repository Structure
+
+```
+Real-Time-Video-Processing/
+│
+├── main.py
+├── requirements.txt
+├── README.md
+├── images/
+│     ├── gui.png
+│     ├── sharpen_output.png
+│     ├── gaussian_output.png
+│     ├── emboss_output.png
+│     ├── negative_output.png
+│     ├── sobel_output.png
+│     ├── canny_output.png
+│     └── result_sharpen.png
+│
+├── captured_frames/
+└── docs/
+```
+
+---
+
+# Future Scope
+
+* GPU acceleration
+* FPGA implementation
+* PYNQ-Z2 deployment
+* Hardware-software co-design
+* Object detection
+* Object tracking
+* Semantic segmentation
+* Deep learning enhancement
+* Edge AI systems
+
+---
+
+# Authors
+
+### Soujit Chel
+
+Department of Electronics and Telecommunication Engineering
+KIIT University, Bhubaneswar, India
+
+### Jhilam Jana
+
+Department of CSE (AI & ML)
+Institute of Engineering and Management, Kolkata, India
+
+### Sayan Tripathi
+
+Department of CSE (AI & ML)
+Institute of Engineering and Management, Kolkata, India
+
+---
+
+# Citation
+
+```bibtex
+@article{chel2026video,
+title={Design and Implementation of a Real-Time Video Processing Framework Using OpenCV-Based Spatial Filtering and Multi-Thread Python Architecture},
+author={Soujit Chel and Jhilam Jana and Sayan Tripathi},
+year={2026}
+}
+```
+
+---
+
+## License
+
+MIT License
